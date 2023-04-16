@@ -5,82 +5,64 @@ const logo = new URL('../assets/open-wc-logo.svg', import.meta.url).href;
 class ProgressBar extends LitElement {
   static properties = {
     header: { type: String },
+    progress: { type: Number },
   }
 
   static styles = css`
     :host {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      font-size: calc(10px + 2vmin);
-      color: #1a2b42;
-      max-width: 960px;
-      margin: 0 auto;
+  
+      display: block;
       text-align: center;
-      background-color: var(--progress-bar-background-color);
+    }
+  
+    .progress-bar-wrapper {
+      display: flex;
+      justify-content: center;
+      transform: translateY(calc(45vh - 80px));
+    width: 100%;
+      
     }
 
-    main {
-      flex-grow: 1;
-    }
+    
 
-    .logo {
-      margin-top: 36px;
-      animation: app-logo-spin infinite 20s linear;
-    }
+.progress-bar-inner {
+  border-radius: 5px;
+  width: 70%;
+  height: 60px;
+  background-color: #ddd;
+  margin-bottom: 10px;
+}
 
-    @keyframes app-logo-spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
 
-    .app-footer {
-      font-size: calc(12px + 0.5vmin);
-      align-items: center;
-    }
-
-    .app-footer a {
-      margin-left: 5px;
-    }
+.progress-bar-filled{
+  background: orange;
+  border-radius: 5px;
+  height: 60px;
+  margin-top: 1px;
+  animation: progress-bar-filled var(--speed-of-bar, 5s) linear forwards;
+}
+@keyframes progress-bar-filled{
+  0% {width: 0%; }
+  100% {width: 100%; }
+}
   `;
 
   constructor() {
     super();
-    this.header = 'My app';
+    this.header = 'Progression of Life';
+    this.progress = 0;
   }
 
   render() {
     return html`
-      <main>
-        <div class="logo"><img alt="open-wc logo" src=${logo} /></div>
-        <h1>${this.header}</h1>
-
-        <p>Edit <code>src/ProgressBar.js</code> and save to reload.</p>
-        <a
-          class="app-link"
-          href="https://open-wc.org/guides/developing-components/code-examples/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Code examples
-        </a>
-      </main>
-
-      <p class="app-footer">
-        🚽 Made with love by
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/open-wc"
-          >open-wc</a
-        >.
-      </p>
+    <div class="progress-bar-wrapper"> 
+  
+      <div class="progress-bar-inner">
+        <div class="progress-bar-filled" style="width:${this.progress}%"></div>
+        
+      </div>
+      </div>
+      
     `;
   }
 }
