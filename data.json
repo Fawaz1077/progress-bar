@@ -1,18 +1,17 @@
 [
-    {
-      
-      
-      "fillPercentage": 25
-    },
-    {
-     
-      
-      "fillPercentage": 50
-    },
-    {
-     
-     
-      "fillPercentage": 75
-    }
-  ]
-  
+  {
+    
+    "fillPercentage": 25,
+    "duration": 5
+  },
+  {
+   
+    "fillPercentage": 50,
+    "duration": 7
+  },
+  {
+    
+    "fillPercentage": 75,
+    "duration": 10
+  }
+]
