@@ -36,7 +36,7 @@ class ScrollDown extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
-    const response = await fetch('./data.json');
+    const response = await fetch('../assets/data.json');
     const data = await response.json();
     this.progressBars = data.map((bar) => {
       return {

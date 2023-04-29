@@ -10,52 +10,42 @@ class ProgressBar extends LitElement {
   };
 
   static styles = css`
-  :host {
-    display: block;
-    text-align: center;
-  }
-
-  .progress-bar-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    transform: translateY(calc(45vh - 80px));
-    width: 100%;
-  }
-
-  .progress-bar-inner {
-    border-radius: 5px;
-    width: 70%;
-    height: 60px;
-    background-color: #ddd;
-    margin-bottom: 10px;
-  }
-
-  .progress-bar-filled {
-    background: orange;
-    border-radius: 5px;
-    height: 60px;
-    margin-top: 1px;
-    animation: progress-bar-filled var(--speed-of-bar, 5s) linear forwards;
-  }
-
-  @keyframes progress-bar-filled {
-    0% {
-      width: 0%;
+    :host {
+      display: block;
+      text-align: center;
     }
-    100% {
+
+    .progress-bar-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      transform: translateY(calc(45vh - 80px));
       width: 100%;
     }
-  }
 
-  .counter {
-    position: absolute;
-    top: 20px;
-    left: 87%;
-    font-size: 20px;
-  }
-`;
+    .progress-bar-inner {
+      border-radius: 5px;
+      width: 70%;
+      height: 60px;
+      background-color: #ddd;
+      margin-bottom: 10px;
+    }
 
+    .progress-bar-filled {
+      background: var(--progress-anim-bar-color, linear-gradient(to right, yellow, #ffa500, #40e0d0));
+      border-radius: 5px;
+      height: 60px;
+      margin-top: 1px;
+    }
+    
+
+    .counter {
+      position: absolute;
+      top: 20px;
+      left: 87%;
+      font-size: 20px;
+    }
+  `;
 
   constructor() {
     super();
@@ -67,7 +57,23 @@ class ProgressBar extends LitElement {
   }
 
   startProgressBarAnimation() {
-    this.progress = this.fillPercentage;
+    const duration = parseFloat(getComputedStyle(this).getPropertyValue('--speed-of-bar')) * 1000;
+    const startTime = performance.now();
+    const targetWidth = this.fillPercentage;
+  
+    const animateProgressBar = (currentTime) => {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      this.progress = parseFloat((progress * targetWidth).toFixed(1));
+  
+      if (progress < 1) {
+        requestAnimationFrame(animateProgressBar);
+      } else {
+        this.progress = targetWidth;
+      }
+    };
+  
+    requestAnimationFrame(animateProgressBar);
   }
 
   startCounterAnimation(target) {
@@ -124,8 +130,7 @@ class ProgressBar extends LitElement {
       </div>
     `;
   }
-  }
-
+}
 
 
 customElements.define('progress-bar', ProgressBar);
