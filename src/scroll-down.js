@@ -45,16 +45,14 @@ class ScrollDown extends LitElement {
     }
 
     .gradient-font {
-      font-size: 3em; /* Adjust the size */
+      font-size: 3em; 
       background: linear-gradient(to right, #FFB266, #FFA500, #FF6600);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
       text-fill-color: transparent;
     }
-    
-   
-    
+
     
   `;
 
@@ -89,8 +87,10 @@ class ScrollDown extends LitElement {
       </h2>
       ${this.progressBars.map(
         (bar) =>
-          html`<h2>${bar.header}</h2>
+          html`
           <progress-bar
+          
+          header=${bar.header}
             style="--speed-of-bar: ${bar.duration}s"
             .fillPercentage=${bar.fillPercentage}
           ></progress-bar>`

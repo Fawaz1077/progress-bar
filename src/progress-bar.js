@@ -33,7 +33,7 @@ class ProgressBar extends LitElement {
   }
   
   .progress-bar-filled {
-    background: var(--progress-anim-bar-color, linear-gradient(to right, #FFB266, #FFA500, #FF6600));
+    background: var(--progress-anim-bar-color, linear-gradient(to left, red, yellow));
     border-radius: 5px;
     height: 60px;
     margin-top: 1px;
@@ -45,24 +45,29 @@ class ProgressBar extends LitElement {
   .counter {
     position: absolute;
     top: 20px;
-    left: 1250px;
+    left: 87%;
     font-size: 10px;
     font-size: 17px;
     font-family: 'Roboto Mono', monospace;
     color: #000;
   }
 
-  
-  
-    
-    
+  .header {
+    position: relative;
+    left: 20px; /* Move 10px to the left */
+    top: 118px; /* Move 10px up */
+    text-align: left;
+    font-size: 1.1rem;
+    color: #555;
+  }
 
-    
   `;
 
+
+  
   constructor() {
     super();
-    this.header = 'Progression of Life';
+  
     this.progress = 0;
     this.counter = 0;
     this.isVisible = false;
@@ -135,10 +140,12 @@ class ProgressBar extends LitElement {
 
   render() {
     return html`
+    <h3 class="header">${this.header}</h3>
       <div class="progress-bar-wrapper">
-        <div class="progress-bar-inner">
+       <div class="progress-bar-inner">
           <div class="progress-bar-filled" style="width:${this.isVisible ? this.progress : 0}%">
-            <div class="counter">${this.isVisible ? this.counter.toFixed(2) : 0.00}s</div>
+          </div>
+          <div class="counter">${this.isVisible ? this.counter.toFixed(2) : 0.00}s</div>
           </div>
         </div>
 
