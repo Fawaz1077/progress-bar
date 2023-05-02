@@ -1,16 +1,16 @@
 [
   {
-    
+    "header": "Rspack",
     "fillPercentage": 25,
     "duration": 5
   },
   {
-   
+    "header": "Webpack (with SWC)",
     "fillPercentage": 50,
     "duration": 7
   },
   {
-    
+    "header": "Webpack (with babel)",
     "fillPercentage": 75,
     "duration": 10
   }

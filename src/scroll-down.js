@@ -27,6 +27,35 @@ class ScrollDown extends LitElement {
       font-size: 2rem;
       text-align: center;
     }
+
+    .title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 100px; 
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    
+    .subheading {
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+    }
+
+    .gradient-font {
+      font-size: 3em; /* Adjust the size */
+      background: linear-gradient(to right, #FFB266, #FFA500, #FF6600);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-fill-color: transparent;
+    }
+    
+   
+    
+    
   `;
 
   constructor() {
@@ -54,6 +83,10 @@ class ScrollDown extends LitElement {
         <h1>Filler Content</h1>
         <p>Scroll down to see the progress bars in action.</p>
       </div>
+      <h2 class="title gradient-font">Blazing fast build speed</h2>
+      <h2 class="subheading">
+        Combining TypeScript and Rust with a parallelized architecture to bring you the ultimate developer experience.
+      </h2>
       ${this.progressBars.map(
         (bar) =>
           html`<h2>${bar.header}</h2>
@@ -64,6 +97,7 @@ class ScrollDown extends LitElement {
       )}
     `;
   }
+  
 }
 
 customElements.define('scroll-down', ScrollDown);
