@@ -10,58 +10,95 @@ class ProgressBar extends LitElement {
   };
 
   static styles = css`
-  :host {
-    display: block;
-    text-align: center;
-  }
-  
-  .progress-bar-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    transform: translateY(calc(10vh - 20px)); 
-    width: 100%;
-  }
-  
-  
-  .progress-bar-inner {
-    border-radius: 5px;
-    width: 70%;
-    height: 60px;
-    background-color: #ddd;
-    margin-bottom: 10px;
-  }
-  
-  .progress-bar-filled {
-    background: var(--progress-anim-bar-color, linear-gradient(to left, red, yellow));
-    border-radius: 5px;
-    height: 60px;
-    margin-top: 1px;
-    position: relative;
-  }
-  
-  
-  
-  .counter {
-    position: absolute;
-    top: 20px;
-    left: 87%;
-    font-size: 10px;
-    font-size: 17px;
-    font-family: 'Roboto Mono', monospace;
-    color: #000;
+    :host {
+      display: block;
+      text-align: center;
+    }
+    
+    .progress-bar-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      transform: translateY(calc(5vh - 65px));
+      width: 100%;
+    }
+
+    .progress-bar-inner {
+      border-radius: 5px;
+      width: 70%;
+      height: 60px;
+      background-color: #ddd;
+      margin-bottom: 10px;
+    }
+    
+    .progress-bar-filled {
+      background: var(--progress-anim-bar-color, linear-gradient(to left, red, yellow));
+      border-radius: 6px;
+      height: 60px;
+      margin-top: -1px;
+      position: relative;
+    }
+
+    .counter {
+      position: absolute;
+      top: 20px;
+      left: 87%;
+      font-size: 17px;
+      font-family: 'Roboto Mono', monospace;
+      color: #000;
+    }
+
+      .counter {
+        top: 12px;
+        left: 86%;
+        font-size: 17px;
+      }
+
+      .header {
+        position: relative;
+        left: 20px;
+        top: 45px;
+        text-align: left;
+        font-size: 1.1rem;
+        color: #555;
+      }
+      
+      @media (max-width: 600px) {
+        .header {
+          top: 100px;
+        }
+      }
+
+  @media (prefers-reduced-motion: reduce) {
+    .progress-bar-filled{
+      animation-timing-function:steps(2,jump-end) !important;
+    }
   }
 
-  .header {
-    position: relative;
-    left: 20px; /* Move 10px to the left */
-    top: 118px; /* Move 10px up */
-    text-align: left;
-    font-size: 1.1rem;
+  .bottom-title {
+    position: absolute;
+    bottom: -800px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
     color: #555;
   }
 
-  `;
+  @media (max-width: 600px) {
+    .bottom-title {
+      font-size: 1.2rem;
+      bottom:  -800px;
+    }
+  }
+    `;
+  
+  reducedMotion(){
+  const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+  
+  if (isReduced) {
+    this.decimals = 0;
+  }
+  }
 
 
   
@@ -138,19 +175,22 @@ class ProgressBar extends LitElement {
     }
   }
 
+
   render() {
     return html`
-    <h3 class="header">${this.header}</h3>
-      <div class="progress-bar-wrapper">
-       <div class="progress-bar-inner">
+      <h3 class="header">${this.header}</h3>
+      <div class="progress-bar-wrapper" aria-label="A bar graph animation showing how long it takes for ${this.header} to be installed" title="A bar graph animation showing how long it takes for ${this.header} to be installed">
+        <div class="progress-bar-inner">
           <div class="progress-bar-filled" style="width:${this.isVisible ? this.progress : 0}%">
           </div>
           <div class="counter">${this.isVisible ? this.counter.toFixed(2) : 0.00}s</div>
-          </div>
         </div>
-
-      `;
+      </div>
+      
+    `;
   }
+  
+  
 }  
 
 customElements.define('progress-bar', ProgressBar);

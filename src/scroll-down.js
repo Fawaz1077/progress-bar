@@ -13,7 +13,7 @@ class ScrollDown extends LitElement {
     }
 
     .filler-content {
-      height: 120vh;
+      height: 90vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -25,13 +25,14 @@ class ScrollDown extends LitElement {
 
     h1 {
       font-size: 2rem;
+      margin-top: -150px;
       text-align: center;
     }
 
     .title {
       font-size: 24px;
       font-weight: bold;
-      margin-top: 100px; 
+      margin-top: 45px; 
       margin-bottom: 30px;
       text-align: center;
     }
@@ -78,8 +79,8 @@ class ScrollDown extends LitElement {
   render() {
     return html`
       <div class="filler-content">
-        <h1>Filler Content</h1>
-        <p>Scroll down to see the progress bars in action.</p>
+        <h1>This is not what you came here for</h1>
+        <p>Scroll down to see the progress bars being filled with happiness.</p>
       </div>
       <h2 class="title gradient-font">Blazing fast build speed</h2>
       <h2 class="subheading">
