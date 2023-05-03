@@ -33,8 +33,8 @@ class ProgressBar extends LitElement {
     
     .progress-bar-filled {
       background: var(--progress-anim-bar-color, linear-gradient(to left, red, yellow));
-      border-radius: 6px;
-      height: 60px;
+      border-radius: 5px;
+      height: 61px;
       margin-top: -1px;
       position: relative;
     }
@@ -75,21 +75,7 @@ class ProgressBar extends LitElement {
     }
   }
 
-  .bottom-title {
-    position: absolute;
-    bottom: -800px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5rem;
-    color: #555;
-  }
-
-  @media (max-width: 600px) {
-    .bottom-title {
-      font-size: 1.2rem;
-      bottom:  -800px;
-    }
-  }
+  
     `;
   
   reducedMotion(){
